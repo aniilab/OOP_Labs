@@ -1,6 +1,0 @@
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelLexer.cs
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelParser.cs
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelListener.cs
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelBaseListener.cs
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelVisitor.cs
-D:\c#\PseudoExcel\PseudoExcel\obj\Debug\PseudoExcelBaseVisitor.cs
