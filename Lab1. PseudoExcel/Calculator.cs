@@ -1,9 +1,6 @@
 ﻿using Antlr4.Runtime;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PseudoExcel
 {
@@ -14,8 +11,11 @@ namespace PseudoExcel
         {
             return checkedCellNames;
         }
-        public static double Evaluate(string expression)
+        public static string Evaluate(string expression)
         {
+            if (expression == string.Empty)
+                return string.Empty;
+
             checkedCellNames.Clear();
             var lexer = new PseudoExcelLexer(new AntlrInputStream(expression));
             lexer.RemoveErrorListeners();
@@ -29,8 +29,8 @@ namespace PseudoExcel
             var visitor = new PseudoExcelVisitor();
             double res = visitor.Visit(tree);
             checkedCellNames = visitor.GetCheckedNames();
-            return res;
 
+            return Convert.ToString(res);
         }
     }
 }

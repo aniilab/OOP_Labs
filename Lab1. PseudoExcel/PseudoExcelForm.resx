@@ -654,7 +654,7 @@
         SZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkSZIkac1t2vT/Afm4il6j6PKvAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="toolStripMenuItem6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="helpMenu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAaxpJREFUeF7t
         vQncLGdZ5p3T3e97lpyT5ZwsJISQkEBiYMIWWY6C4IfsKKAogoCKIqBjFEZxYcYMiIAzLoAMIuNChNGB
@@ -1117,7 +1117,7 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="toolStripMenuItem7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Author.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABLAAAASwCAYAAADrIbPPAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AABNlElEQVR4Xu3dd9xmdX3n/2n0ohQFGyBK

@@ -10,11 +10,8 @@ using System.Windows.Forms;
 
 namespace PseudoExcel
 {
-    public class Table 
+    public class Table
     {
-        private const int INITIAL_COLS = 12;
-        private const int INITIAL_ROWS = 20;
-
         [JsonProperty]
         public int cols;
 
@@ -25,7 +22,7 @@ namespace PseudoExcel
         public List<List<Cell>> grid = new List<List<Cell>>();
 
         [JsonProperty]
-        private static Dictionary<string, string> CellNameValue = new Dictionary<string, string>();
+        private Dictionary<string, string> CellNameValue = new Dictionary<string, string>();
 
         public Table()
         {}
@@ -172,7 +169,7 @@ namespace PseudoExcel
             string result = null;
             try
             {
-                result = Convert.ToString(Calculator.Evaluate(expression));
+                result = Calculator.Evaluate(expression);
                 if (result == "∞")
                 {
                     MessageBox.Show("Error! Division by zero!");
@@ -309,7 +306,7 @@ namespace PseudoExcel
                 {
                     errorMessage = "There are not empty cells: ";
                     errorMessage += string.Join(";", notEmptyCells.ToArray());
-                    errorMessage += ' ';
+                    errorMessage += ". ";
                 }
 
                 if (lastRow.Count != 0)
@@ -318,7 +315,7 @@ namespace PseudoExcel
                     foreach (Cell cell in lastRow)
                     {
                         errorMessage += string.Join(";", cell.name);
-                        errorMessage += " ";
+                        errorMessage += ". ";
                     }
                 }
 
@@ -350,11 +347,11 @@ namespace PseudoExcel
             if (cols == 0)
                 return false;
 
-            int curcol = cols - 1;
+            int curcol = cols-1;
 
             for (int i = 0; i < rows; i++)
             {
-                string name = Sys26.To26Sys(curcol) + i.ToString();
+                string name = Sys26.To26Sys(curcol) + (i).ToString();
                 if (CellNameValue[name] != "0" && CellNameValue[name] != "" && CellNameValue[name] != " ")
                     notEmptyCells.Add(name);
                 if (grid[i][curcol].PointersOnCells.Count != 0)
@@ -369,6 +366,7 @@ namespace PseudoExcel
                 {
                     errorMessage = "There are not empty cells: ";
                     errorMessage += string.Join(";", notEmptyCells.ToArray());
+                    errorMessage += ". ";
                 }
 
                 if (lastCol.Count != 0)
@@ -376,12 +374,13 @@ namespace PseudoExcel
                     errorMessage += "There are cells that point to cells from current column: ";
                     foreach (Cell cell in lastCol)
                         errorMessage += string.Join(";", cell.name);
+                    errorMessage += ". ";
                 }
 
                 errorMessage += "Are you sure you want to delete this column?";
-                System.Windows.Forms.DialogResult res = System.Windows.Forms.MessageBox.Show(errorMessage, "Warning", System.Windows.Forms.MessageBoxButtons.YesNo);
+                DialogResult res = MessageBox.Show(errorMessage, "Warning", System.Windows.Forms.MessageBoxButtons.YesNo);
 
-                if (res == System.Windows.Forms.DialogResult.No)
+                if (res == DialogResult.No)
                     return false;
             }
 
@@ -405,13 +404,7 @@ namespace PseudoExcel
 
         public void FillDGV(DataGridView table)
         {
-            table.ColumnHeadersVisible = true;
-            table.RowHeadersVisible = true;
-            table.ColumnCount = cols;
-            table.FillHeaders(cols, rows);
-
-            table.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
-            table.MultiSelect = false;
+            table.InitializeDGV(cols, rows);
 
             for(int i = 0; i < rows; i++)
             {
@@ -420,7 +413,7 @@ namespace PseudoExcel
                     table.Rows[i].Cells[j].Value = grid[i][j].value;
                 }
             }
-        } 
+        }
     }
 }
 
