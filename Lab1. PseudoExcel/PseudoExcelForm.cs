@@ -167,7 +167,7 @@ namespace PseudoExcel
             MessageBox.Show("Author of this laboratory work says hi!\nAuthor: Alina Bedenko from K-27.", "Author Info");
         }
 
-        private void PseudoExcelForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void PseudoExcelForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -175,11 +175,14 @@ namespace PseudoExcel
                 DialogResult result1 = MessageBox.Show("Do you want to save file?", "Wanna save?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result1 == DialogResult.Yes)
                 {
-                    saveFile_Click(sender, e);
-                    return;
+                    if (IsSavedTable(savepath))
+                    {
+                        MessageBox.Show("Successfully saved!");
+                        return;
+                    }
+                    else return;
                 }
                 else return;
-
             }
             else
             {
