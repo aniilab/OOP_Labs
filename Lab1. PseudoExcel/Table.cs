@@ -59,7 +59,6 @@ namespace PseudoExcel
         public void ChangeCell(int row, int column, string expression, DataGridView dgv)
         {
             grid[row][column].DeletePointersAndRefs();
-            grid[row][column].expression = expression;
             grid[row][column].NewCellsPointOnMe.Clear();
 
             if (expression != "")
@@ -86,9 +85,6 @@ namespace PseudoExcel
             if (!grid[row][column].CheckLoop(grid[row][column].NewCellsPointOnMe))
             {
                 MessageBox.Show("There is a loop! Please, change your expression.");
-                grid[row][column].expression = "";
-                grid[row][column].value = "0";
-                dgv[column, row].Value = "0";
                 return;
             }
 
@@ -97,16 +93,17 @@ namespace PseudoExcel
             if (value == "error")
             {
                 MessageBox.Show("Error in the cell - " + grid[row][column].name);
-                grid[row][column].expression = "";
-                grid[row][column].value = "0";
-                dgv[column, row].Value = "0";
                 return;
             }
 
+
+            grid[row][column].expression = expression;
             grid[row][column].value = value;
             CellNameValue[grid[row][column].name] = value;
             foreach (Cell cell in grid[row][column].PointersOnCells)
                 RefreshCellAndPointers(cell, dgv);
+
+            return;
         }
 
         public bool RefreshCellAndPointers(Cell cell, DataGridView dgv)
@@ -158,7 +155,7 @@ namespace PseudoExcel
         {
             if (CellNameValue.ContainsKey(m.Value))
                 if (CellNameValue[m.Value] == "")
-                    return "";
+                    return "0";
                 else
                     return CellNameValue[m.Value];
             return m.Value;
@@ -172,14 +169,13 @@ namespace PseudoExcel
                 result = Calculator.Evaluate(expression);
                 if (result == "∞")
                 {
-                    MessageBox.Show("Error! Division by zero!");
-                    result = "";
+                    MessageBox.Show("The expression is approaching infinity. Be attentive!");
                 }
                 return result;
             }
-            catch
+            catch(Exception e)
             {
-                return "";
+                return "error";
             }
         }
 
@@ -189,9 +185,9 @@ namespace PseudoExcel
             {
                 foreach (Cell cell in list)
                 {
-                    if (cell.CellsPointOnMe != null)
+                    //if (cell.CellsPointOnMe != null)
                         cell.CellsPointOnMe.Clear();
-                    if (cell.NewCellsPointOnMe != null)
+                    //if (cell.NewCellsPointOnMe != null)
                         cell.NewCellsPointOnMe.Clear();
                     if (cell.expression == "")
                         continue;
@@ -221,8 +217,8 @@ namespace PseudoExcel
             {
                 foreach (Cell cell in list)
                 {
-                    if (cell.CellsPointOnMe != null)
-                    {
+                    //if (cell.CellsPointOnMe != null)
+                    //{
                         foreach (Cell cell_ref in cell.CellsPointOnMe)
                         {
                             if (cell_ref.row == rows)
@@ -231,7 +227,7 @@ namespace PseudoExcel
                                     cell_ref.PointersOnCells.Add(cell);
                             }
                         }
-                    }
+                    //}
                 }
             }
             for (int i = 0; i < cols; i++)
@@ -258,8 +254,8 @@ namespace PseudoExcel
             {
                 foreach (Cell cell in list)
                 {
-                    if (cell.CellsPointOnMe != null)
-                    {
+                    //if (cell.CellsPointOnMe != null)
+                    //{
                         foreach (Cell cell_ref in cell.CellsPointOnMe)
                         {
                             if (cell_ref.col == cols)
@@ -268,7 +264,7 @@ namespace PseudoExcel
                                     cell_ref.PointersOnCells.Add(cell);
                             }
                         }
-                    }
+                    //}
                 }
             }
             for (int i = 0; i < rows; i++)
@@ -283,10 +279,10 @@ namespace PseudoExcel
             List<Cell> lastRow = new List<Cell>();
             List<string> notEmptyCells = new List<string>();
 
-            if (rows == 0)
+            if (rows == 1 || rows == 0)
                 return false;
 
-            int currow = rows - 1;
+            int currow = rows-1;
 
             for (int i = 0; i < cols; i++)
             {
@@ -344,7 +340,7 @@ namespace PseudoExcel
             List<Cell> lastCol = new List<Cell>();
             List<string> notEmptyCells = new List<string>();
 
-            if (cols == 0)
+            if (cols == 0 || cols == 1)
                 return false;
 
             int curcol = cols-1;

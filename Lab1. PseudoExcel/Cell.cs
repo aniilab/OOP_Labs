@@ -71,14 +71,14 @@ namespace PseudoExcel
 
         public void DeletePointersAndRefs()
         {
-            if (CellsPointOnMe != null)
-            {
+            //if (CellsPointOnMe != null)
+            //{
                 foreach (Cell point in CellsPointOnMe)
                 {
                     point.PointersOnCells.Remove(this);
                 }
-                CellsPointOnMe = null;
-            }
+                CellsPointOnMe.Clear();
+            //}
         }
     }
 }

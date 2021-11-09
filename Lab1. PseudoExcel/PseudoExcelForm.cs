@@ -29,15 +29,28 @@ namespace PseudoExcel
             textBox.Text = expression;
         }
 
+        private void CellValueChanged(string input, int col, int row)
+        {
+            if (input == "") return;
+            tableModel.ChangeCell(row, col, input, table);
+
+            table[col, row].Value = tableModel.grid[row][col].value;
+            textBox.Text = tableModel.grid[row][col].expression;
+        }
         private void table_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 table.CellValueChanged -= table_CellValueChanged;
 
                 try
                 {
-                    CellValueChanged(table[e.ColumnIndex, e.RowIndex].Value.ToString());
+                    string input = string.Empty;
+                    if (table[e.ColumnIndex, e.RowIndex].Value != null)
+                    {
+                        input = table[e.ColumnIndex, e.RowIndex].Value.ToString();
+                    }
+                    CellValueChanged(input, e.ColumnIndex, e.RowIndex);
                 }
                 finally
                 {
@@ -48,19 +61,10 @@ namespace PseudoExcel
 
         private void calculate_Click(object sender, EventArgs e)
         {
-            CellValueChanged(textBox.Text);
-            textBox.Focus();
-        }
-
-        private void CellValueChanged(string input)
-        {
             int col = table.SelectedCells[0].ColumnIndex;
             int row = table.SelectedCells[0].RowIndex;
-            string expression = input;
-            if (expression == "") return;
-            tableModel.ChangeCell(row, col, expression, table);
-            table[col, row].Value = tableModel.grid[row][col].value;
-            textBox.Text = expression;
+            CellValueChanged(textBox.Text, col, row);
+            textBox.Focus();
         }
 
         private void helpMenu_Click(object sender, EventArgs e)
@@ -189,5 +193,6 @@ namespace PseudoExcel
                 e.Cancel = true;
             }
         }
+
     }
 }

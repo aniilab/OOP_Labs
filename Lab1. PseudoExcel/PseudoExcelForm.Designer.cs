@@ -60,16 +60,16 @@ namespace PseudoExcel
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.LightGray;
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripMenuItem10,
             this.textBox,
             this.calculate});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 28);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 33);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(711, 32);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 35);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,7 +80,7 @@ namespace PseudoExcel
             this.AddColumn});
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(75, 28);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(86, 31);
             this.toolStripMenuItem1.Text = "Add";
             // 
             // AddRow
@@ -89,7 +89,7 @@ namespace PseudoExcel
             this.AddRow.Name = "AddRow";
             this.AddRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.AddRow.Size = new System.Drawing.Size(234, 26);
+            this.AddRow.Size = new System.Drawing.Size(286, 34);
             this.AddRow.Text = "Row";
             this.AddRow.Click += new System.EventHandler(this.AddRow_Click);
             // 
@@ -99,7 +99,7 @@ namespace PseudoExcel
             this.AddColumn.Name = "AddColumn";
             this.AddColumn.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.AddColumn.Size = new System.Drawing.Size(234, 26);
+            this.AddColumn.Size = new System.Drawing.Size(286, 34);
             this.AddColumn.Text = "Column";
             this.AddColumn.Click += new System.EventHandler(this.AddColumn_Click);
             // 
@@ -110,7 +110,7 @@ namespace PseudoExcel
             this.DeleteColumn});
             this.toolStripMenuItem10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem10.Image")));
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(91, 28);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(102, 31);
             this.toolStripMenuItem10.Text = "Delete";
             // 
             // DeleteRow
@@ -119,7 +119,7 @@ namespace PseudoExcel
             this.DeleteRow.Name = "DeleteRow";
             this.DeleteRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.R)));
-            this.DeleteRow.Size = new System.Drawing.Size(223, 26);
+            this.DeleteRow.Size = new System.Drawing.Size(272, 34);
             this.DeleteRow.Text = "Row";
             this.DeleteRow.Click += new System.EventHandler(this.DeleteRow_Click);
             // 
@@ -129,7 +129,7 @@ namespace PseudoExcel
             this.DeleteColumn.Name = "DeleteColumn";
             this.DeleteColumn.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.C)));
-            this.DeleteColumn.Size = new System.Drawing.Size(223, 26);
+            this.DeleteColumn.Size = new System.Drawing.Size(272, 34);
             this.DeleteColumn.Text = "Column";
             this.DeleteColumn.Click += new System.EventHandler(this.DeleteColumn_Click);
             // 
@@ -137,27 +137,27 @@ namespace PseudoExcel
             // 
             this.textBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(267, 28);
+            this.textBox.Size = new System.Drawing.Size(300, 31);
             // 
             // calculate
             // 
             this.calculate.BackColor = System.Drawing.Color.Thistle;
             this.calculate.Name = "calculate";
-            this.calculate.Size = new System.Drawing.Size(84, 28);
+            this.calculate.Size = new System.Drawing.Size(98, 31);
             this.calculate.Text = "Calculate";
             this.calculate.Click += new System.EventHandler(this.calculate_Click);
             // 
             // menuStrip2
             // 
             this.menuStrip2.BackColor = System.Drawing.Color.DarkGray;
+            this.menuStrip2.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2,
             this.toolStripMenuItem5});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip2.Size = new System.Drawing.Size(711, 28);
+            this.menuStrip2.Size = new System.Drawing.Size(800, 33);
             this.menuStrip2.TabIndex = 2;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -167,7 +167,7 @@ namespace PseudoExcel
             this.openFile,
             this.saveFile});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(46, 24);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(54, 29);
             this.toolStripMenuItem2.Text = "File";
             // 
             // openFile
@@ -176,7 +176,7 @@ namespace PseudoExcel
             this.openFile.Name = "openFile";
             this.openFile.ShortcutKeyDisplayString = "Ctrl+O";
             this.openFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFile.Size = new System.Drawing.Size(181, 26);
+            this.openFile.Size = new System.Drawing.Size(223, 34);
             this.openFile.Text = "Open";
             this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
@@ -185,7 +185,7 @@ namespace PseudoExcel
             this.saveFile.Image = ((System.Drawing.Image)(resources.GetObject("saveFile.Image")));
             this.saveFile.Name = "saveFile";
             this.saveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveFile.Size = new System.Drawing.Size(181, 26);
+            this.saveFile.Size = new System.Drawing.Size(223, 34);
             this.saveFile.Text = "Save";
             this.saveFile.Click += new System.EventHandler(this.saveFile_Click);
             // 
@@ -195,14 +195,14 @@ namespace PseudoExcel
             this.helpMenu,
             this.Author});
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(49, 24);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(60, 29);
             this.toolStripMenuItem5.Text = "Info";
             // 
             // helpMenu
             // 
             this.helpMenu.Image = ((System.Drawing.Image)(resources.GetObject("helpMenu.Image")));
             this.helpMenu.Name = "helpMenu";
-            this.helpMenu.Size = new System.Drawing.Size(137, 26);
+            this.helpMenu.Size = new System.Drawing.Size(169, 34);
             this.helpMenu.Text = "Help";
             this.helpMenu.Click += new System.EventHandler(this.helpMenu_Click);
             // 
@@ -210,7 +210,7 @@ namespace PseudoExcel
             // 
             this.Author.Image = ((System.Drawing.Image)(resources.GetObject("Author.Image")));
             this.Author.Name = "Author";
-            this.Author.Size = new System.Drawing.Size(137, 26);
+            this.Author.Size = new System.Drawing.Size(169, 34);
             this.Author.Text = "Author";
             this.Author.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -244,7 +244,7 @@ namespace PseudoExcel
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.table.DefaultCellStyle = dataGridViewCellStyle2;
             this.table.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.table.Location = new System.Drawing.Point(0, 60);
+            this.table.Location = new System.Drawing.Point(0, 68);
             this.table.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.table.Name = "table";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -257,17 +257,17 @@ namespace PseudoExcel
             this.table.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.table.RowHeadersWidth = 62;
             this.table.RowTemplate.Height = 28;
-            this.table.Size = new System.Drawing.Size(711, 300);
+            this.table.Size = new System.Drawing.Size(800, 382);
             this.table.TabIndex = 1;
             this.table.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_CellClick);
             this.table.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_CellValueChanged);
             // 
             // PseudoExcelForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(711, 360);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.table);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
@@ -276,6 +276,7 @@ namespace PseudoExcel
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PseudoExcelForm";
             this.Text = "PseudoExcel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PseudoExcelForm_FormClosing_1);
             this.Load += new System.EventHandler(this.PseudoExcelForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

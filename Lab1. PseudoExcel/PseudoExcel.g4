@@ -11,7 +11,7 @@ compileUnit:expression EOF;
  LPAREN expression RPAREN #ParenthesizedExpr
  | expression EXPONENT expression #ExponentialExpr
  | expression operatorToken=(MULTIPLY | DIVIDE) expression #MultiplicativeExpr
- | operatorToken=(MAX| MIN) LPAREN expression DESP expression RPAREN #MaxMinExpr
+ | operatorToken=(MAX| MIN) LPAREN expression COMMA expression RPAREN #MaxMinExpr
  | expression operatorToken=(ADD | SUBSTRACT) expression #AdditiveExpr
  | operatorToken=(INC| DEC) LPAREN expression RPAREN #IncDecExpr
  | NUMBER #NumberExpr
