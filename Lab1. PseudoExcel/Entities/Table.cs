@@ -2,21 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PseudoExcelExpressionCalculator;
+using PseudoExcel.Utils;
 
-
-namespace PseudoExcel
+namespace PseudoExcel.Entities
 {
     public class Table
     {
         [JsonProperty]
-        public int cols;
+        public int ColumnsAmount { get; private set; }
 
         [JsonProperty]
-        public int rows;
+        public int RowsAmount { get; private set; }
 
         [JsonProperty]
         public List<List<Cell>> grid = new List<List<Cell>>();
@@ -24,54 +23,43 @@ namespace PseudoExcel
         [JsonProperty]
         private Dictionary<string, string> CellNameValue = new Dictionary<string, string>();
 
-        public Table()
-        {}
+        private Table() { }
 
-        public void SetTable(int col, int row)
+        public Table(int columns, int rows)
         {
-            Clear();
-            cols = col;
-            rows = row;
+            ColumnsAmount = columns;
+            RowsAmount = rows;
             for (int i = 0; i < rows; i++)
             {
                 List<Cell> newrow = new List<Cell>();
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     Cell temp = new Cell(i, j);
                     newrow.Add(temp);
-                    CellNameValue.Add(temp.name, "");
+                    CellNameValue.Add(temp.Name, string.Empty);
                 }
                 grid.Add(newrow);
             }
         }
-        public void Clear()
-        {
-            foreach (List<Cell> list in grid)
-            {
-                list.Clear();
-            }
-            grid.Clear();
-            CellNameValue.Clear();
-            rows = 0;
-            cols = 0;
-        }
 
-        public void ChangeCell(int row, int column, string expression, DataGridView dgv)
+        public bool ChangeCell(int row, int column, string expression, DataGridView dgv)
         {
             grid[row][column].DeletePointersAndRefs();
             grid[row][column].NewCellsPointOnMe.Clear();
 
-            if (expression != "")
+            if (!string.IsNullOrEmpty(expression))
             {
-                if (expression[0] != '=')
+                if (!expression.StartsWith("="))
                 {
-                    grid[row][column].value = expression;
-                    CellNameValue[Sys26.To26Sys(column)+row.ToString()] = expression;
+                    grid[row][column].Value = expression;
+                    grid[row][column].Expression = string.Empty;
+                    CellNameValue[Sys26.To26Sys(column) + row.ToString()] = expression;
                     foreach (Cell cell in grid[row][column].PointersOnCells)
                     {
-                        RefreshCellAndPointers(cell, dgv);
+                        if (!RefreshCellAndPointers(cell, dgv))
+                            return false;
                     }
-                    return;
+                    return true;
                 }
             }
 
@@ -85,43 +73,47 @@ namespace PseudoExcel
             if (!grid[row][column].CheckLoop(grid[row][column].NewCellsPointOnMe))
             {
                 MessageBox.Show("There is a loop! Please, change your expression.");
-                return;
+                return false;
             }
 
             grid[row][column].AddPointersAndRefs();
             string value = Calculate(new_expression);
             if (value == "error")
             {
-                MessageBox.Show("Error in the cell - " + grid[row][column].name);
-                return;
+                MessageBox.Show("Error in the cell - " + grid[row][column].Name);
+                return false;
             }
 
 
-            grid[row][column].expression = expression;
-            grid[row][column].value = value;
-            CellNameValue[grid[row][column].name] = value;
-            foreach (Cell cell in grid[row][column].PointersOnCells)
-                RefreshCellAndPointers(cell, dgv);
+            grid[row][column].Expression = expression;
+            grid[row][column].Value = value;
+            CellNameValue[grid[row][column].Name] = value;
+            foreach (Cell cell in grid[row][column].PointersOnCells.ToList())
+            {
+                if (!RefreshCellAndPointers(cell, dgv))
+                    return false;
+            }
 
-            return;
+            return true;
         }
 
         public bool RefreshCellAndPointers(Cell cell, DataGridView dgv)
         {
             cell.NewCellsPointOnMe.Clear();
-            string new_expression = ConvertReferences(cell.row, cell.col, cell.expression);
+            string new_expression = ConvertReferences(cell.RowNumber, cell.ColumnNumber, cell.Expression);
             new_expression = new_expression.Remove(0, 1);
             string value = Calculate(new_expression);
 
             if (value == "error")
             {
-                MessageBox.Show("Error in the cell - " + cell.name);
+                MessageBox.Show("Error in the cell - " + cell.Name);
                 return false;
             }
 
-            grid[cell.row][cell.col].value = value;
-            CellNameValue[grid[cell.row][cell.col].name] = value;
-            dgv[cell.col, cell.row].Value = value;
+            grid[cell.RowNumber][cell.ColumnNumber].Value = value;
+            CellNameValue[grid[cell.RowNumber][cell.ColumnNumber].Name] = value;
+
+            dgv[cell.ColumnNumber, cell.RowNumber].Value = value;
 
             foreach (Cell point in cell.PointersOnCells)
             {
@@ -146,24 +138,22 @@ namespace PseudoExcel
                 }
             }
 
-            MatchEvaluator evaluator = new MatchEvaluator(referencesToValue);
+            MatchEvaluator evaluator = new MatchEvaluator(ReferencesToValue);
             string new_expression = regex.Replace(expression, evaluator);
             return new_expression;
         }
 
-        public string referencesToValue(Match m)
+        public string ReferencesToValue(Match m)
         {
-            if (CellNameValue.ContainsKey(m.Value))
-                if (CellNameValue[m.Value] == "")
-                    return "0";
-                else
-                    return CellNameValue[m.Value];
-            return m.Value;
+            if (CellNameValue.ContainsKey(m.Value) && !string.IsNullOrWhiteSpace(CellNameValue[m.Value]))
+                return CellNameValue[m.Value];
+            else
+                return "0";
         }
 
         public string Calculate(string expression)
         {
-            string result = null;
+            string result;
             try
             {
                 result = Calculator.Evaluate(expression);
@@ -173,7 +163,7 @@ namespace PseudoExcel
                 }
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return "error";
             }
@@ -181,20 +171,19 @@ namespace PseudoExcel
 
         public void RefreshRefs()
         {
-            foreach (List<Cell> list in grid)
+            foreach (List<Cell> row in grid)
             {
-                foreach (Cell cell in list)
+                foreach (Cell cell in row)
                 {
-                    //if (cell.CellsPointOnMe != null)
-                        cell.CellsPointOnMe.Clear();
-                    //if (cell.NewCellsPointOnMe != null)
-                        cell.NewCellsPointOnMe.Clear();
-                    if (cell.expression == "")
+                    cell.CellsPointOnMe.Clear();
+                    cell.NewCellsPointOnMe.Clear();
+
+                    if (string.IsNullOrEmpty(cell.Expression))
                         continue;
-                    string new_expression = cell.expression;
-                    if (cell.expression[0] == '=')
+
+                    if (cell.Expression.StartsWith("="))
                     {
-                        new_expression = ConvertReferences(cell.row, cell.col, cell.expression);
+                        ConvertReferences(cell.RowNumber, cell.ColumnNumber, cell.Expression);
                         cell.CellsPointOnMe.AddRange(cell.NewCellsPointOnMe);
                     }
                 }
@@ -205,11 +194,11 @@ namespace PseudoExcel
         {
             List<Cell> newRow = new List<Cell>();
 
-            for (int j = 0; j < cols; j++)
+            for (int j = 0; j < ColumnsAmount; j++)
             {
-                Cell temp = new Cell(rows, j);
+                Cell temp = new Cell(RowsAmount, j);
                 newRow.Add(temp);
-                CellNameValue.Add(temp.name, "");
+                CellNameValue.Add(temp.Name, "");
             }
             grid.Add(newRow);
             RefreshRefs();
@@ -217,36 +206,33 @@ namespace PseudoExcel
             {
                 foreach (Cell cell in list)
                 {
-                    //if (cell.CellsPointOnMe != null)
-                    //{
-                        foreach (Cell cell_ref in cell.CellsPointOnMe)
+                    foreach (Cell cell_ref in cell.CellsPointOnMe)
+                    {
+                        if (cell_ref.RowNumber == RowsAmount)
                         {
-                            if (cell_ref.row == rows)
-                            {
-                                if (!cell_ref.PointersOnCells.Contains(cell))
-                                    cell_ref.PointersOnCells.Add(cell);
-                            }
+                            if (!cell_ref.PointersOnCells.Contains(cell))
+                                cell_ref.PointersOnCells.Add(cell);
                         }
-                    //}
+                    }
                 }
             }
-            for (int i = 0; i < cols; i++)
+            for (int i = 0; i < ColumnsAmount; i++)
             {
-                ChangeCell(rows, i, "", dgv);
+                ChangeCell(RowsAmount, i, "", dgv);
             }
 
-            rows++;
+            RowsAmount++;
         }
 
         public void AddColumn(DataGridView dgv)
         {
             List<Cell> newCol = new List<Cell>();
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsAmount; i++)
             {
-                Cell temp = new Cell(i, cols);
+                Cell temp = new Cell(i, ColumnsAmount);
                 grid[i].Add(temp);
-                CellNameValue.Add(temp.name, "");
+                CellNameValue.Add(temp.Name, "");
             }
 
             RefreshRefs();
@@ -254,47 +240,44 @@ namespace PseudoExcel
             {
                 foreach (Cell cell in list)
                 {
-                    //if (cell.CellsPointOnMe != null)
-                    //{
-                        foreach (Cell cell_ref in cell.CellsPointOnMe)
+                    foreach (Cell cell_ref in cell.CellsPointOnMe)
+                    {
+                        if (cell_ref.ColumnNumber == ColumnsAmount)
                         {
-                            if (cell_ref.col == cols)
-                            {
-                                if (!cell_ref.PointersOnCells.Contains(cell))
-                                    cell_ref.PointersOnCells.Add(cell);
-                            }
+                            if (!cell_ref.PointersOnCells.Contains(cell))
+                                cell_ref.PointersOnCells.Add(cell);
                         }
-                    //}
+                    }
                 }
             }
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsAmount; i++)
             {
-                ChangeCell(i, cols, "", dgv);
+                ChangeCell(i, ColumnsAmount, "", dgv);
             }
-            cols++;
+            ColumnsAmount++;
         }
 
         public bool DeleteRow(DataGridView dataGridView)
         {
-            List<Cell> lastRow = new List<Cell>();
+            List<Cell> cellsPointingOnMe = new List<Cell>();
             List<string> notEmptyCells = new List<string>();
 
-            if (rows == 1 || rows == 0)
+            if (RowsAmount <= 1)
                 return false;
 
-            int currow = rows-1;
+            int currow = RowsAmount - 1;
 
-            for (int i = 0; i < cols; i++)
+            for (int i = 0; i < ColumnsAmount; i++)
             {
-                string name = Sys26.To26Sys(i)+currow.ToString();
+                string name = Sys26.To26Sys(i) + currow.ToString();
 
                 if (CellNameValue[name] != "0" && CellNameValue[name] != "" && CellNameValue[name] != " ")
                     notEmptyCells.Add(name);
                 if (grid[currow][i].PointersOnCells.Count != 0)
-                    lastRow.AddRange(grid[currow][i].PointersOnCells);
+                    cellsPointingOnMe.AddRange(grid[currow][i].PointersOnCells);
             }
 
-            if (lastRow.Count != 0 || notEmptyCells.Count != 0)
+            if (cellsPointingOnMe.Count != 0 || notEmptyCells.Count != 0)
             {
                 string errorMessage = "";
 
@@ -305,12 +288,12 @@ namespace PseudoExcel
                     errorMessage += ". ";
                 }
 
-                if (lastRow.Count != 0)
+                if (cellsPointingOnMe.Count != 0)
                 {
                     errorMessage += "There are cells that point to cells from current row : ";
-                    foreach (Cell cell in lastRow)
+                    foreach (Cell cell in cellsPointingOnMe)
                     {
-                        errorMessage += string.Join(";", cell.name);
+                        errorMessage += string.Join(";", cell.Name);
                         errorMessage += ". ";
                     }
                 }
@@ -322,39 +305,39 @@ namespace PseudoExcel
                     return false;
             }
 
-            for (int i = 0; i < cols; i++)
+            for (int i = 0; i < ColumnsAmount; i++)
             {
-                string name = Sys26.To26Sys(i)+currow.ToString();
+                string name = Sys26.To26Sys(i) + currow.ToString();
                 CellNameValue.Remove(name);
             }
 
-            foreach (Cell cell in lastRow)
+            foreach (Cell cell in cellsPointingOnMe)
                 RefreshCellAndPointers(cell, dataGridView);
             grid.RemoveAt(currow);
-            rows--;
+            RowsAmount--;
             return true;
         }
 
         public bool DeleteColumn(DataGridView dataGridView)
         {
-            List<Cell> lastCol = new List<Cell>();
+            List<Cell> cellsPointingOnMe = new List<Cell>();
             List<string> notEmptyCells = new List<string>();
 
-            if (cols == 0 || cols == 1)
+            if (ColumnsAmount == 0 || ColumnsAmount == 1)
                 return false;
 
-            int curcol = cols-1;
+            int curcol = ColumnsAmount - 1;
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsAmount; i++)
             {
                 string name = Sys26.To26Sys(curcol) + (i).ToString();
                 if (CellNameValue[name] != "0" && CellNameValue[name] != "" && CellNameValue[name] != " ")
                     notEmptyCells.Add(name);
                 if (grid[i][curcol].PointersOnCells.Count != 0)
-                    lastCol.AddRange(grid[i][curcol].PointersOnCells);
+                    cellsPointingOnMe.AddRange(grid[i][curcol].PointersOnCells);
             }
 
-            if (lastCol.Count != 0 || notEmptyCells.Count != 0)
+            if (cellsPointingOnMe.Count != 0 || notEmptyCells.Count != 0)
             {
                 string errorMessage = "";
 
@@ -365,51 +348,37 @@ namespace PseudoExcel
                     errorMessage += ". ";
                 }
 
-                if (lastCol.Count != 0)
+                if (cellsPointingOnMe.Count != 0)
                 {
                     errorMessage += "There are cells that point to cells from current column: ";
-                    foreach (Cell cell in lastCol)
-                        errorMessage += string.Join(";", cell.name);
+                    foreach (Cell cell in cellsPointingOnMe)
+                        errorMessage += string.Join(";", cell.Name);
                     errorMessage += ". ";
                 }
 
                 errorMessage += "Are you sure you want to delete this column?";
-                DialogResult res = MessageBox.Show(errorMessage, "Warning", System.Windows.Forms.MessageBoxButtons.YesNo);
+                DialogResult res = MessageBox.Show(errorMessage, "Warning", MessageBoxButtons.YesNo);
 
                 if (res == DialogResult.No)
                     return false;
             }
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsAmount; i++)
             {
                 string name = Sys26.To26Sys(curcol) + i.ToString();
                 CellNameValue.Remove(name);
             }
 
-            foreach (Cell cell in lastCol)
+            foreach (Cell cell in cellsPointingOnMe)
                 RefreshCellAndPointers(cell, dataGridView);
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < RowsAmount; i++)
             {
                 grid[i].RemoveAt(curcol);
             }
 
-            cols--;
+            ColumnsAmount--;
             return true;
-        }
-
-        public void FillDGV(DataGridView table)
-        {
-            table.InitializeDGV(cols, rows);
-
-            for(int i = 0; i < rows; i++)
-            {
-                for(int j = 0; j < cols; j++)
-                {
-                    table.Rows[i].Cells[j].Value = grid[i][j].value;
-                }
-            }
         }
     }
 }
-

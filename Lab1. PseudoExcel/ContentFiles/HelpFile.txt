@@ -1,4 +1,4 @@
-Welcome to the PseudoExcel program!
+﻿Welcome to the PseudoExcel program!
 It is a basic version of ExcelProgram. You can fill cells in the table using textbox above the grid and then BE SURE to click on "Calculate" button.
 If you want to calculate something, every expression has to start with "=".
 Some mathematical operations available in this program:

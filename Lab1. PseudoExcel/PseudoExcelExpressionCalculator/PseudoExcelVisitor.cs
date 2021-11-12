@@ -2,12 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace PseudoExcel
+namespace PseudoExcelExpressionCalculator
 {
     class PseudoExcelVisitor : PseudoExcelBaseVisitor<double>
     {
@@ -15,7 +11,7 @@ namespace PseudoExcel
         public List<string> GetCheckedNames()
         {
             List<string> res = new List<string>();
-            foreach(var pair in tableIdentifier)
+            foreach (var pair in tableIdentifier)
             {
                 res.Add(pair.Key);
             }

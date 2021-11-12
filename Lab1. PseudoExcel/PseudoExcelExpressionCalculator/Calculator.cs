@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PseudoExcel
+namespace PseudoExcelExpressionCalculator
 {
     public static class Calculator
     {

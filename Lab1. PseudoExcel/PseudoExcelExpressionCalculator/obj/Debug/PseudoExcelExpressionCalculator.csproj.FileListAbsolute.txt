@@ -1,0 +1,31 @@
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\PseudoExcelExpressionCalculator.dll
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\PseudoExcelExpressionCalculator.pdb
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\Antlr4.Runtime.dll
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\Antlr4.Runtime.xml
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelLexer.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelParser.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelListener.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelBaseListener.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelVisitor.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelBaseVisitor.cs
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.CoreCompileInputs.cache
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.CopyComplete
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.dll
+C:\Users\arbe01\Desktop\PseudoExcel (2)\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.pdb
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\PseudoExcelExpressionCalculator.dll
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\PseudoExcelExpressionCalculator.pdb
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\Antlr4.Runtime.dll
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\bin\Debug\Antlr4.Runtime.xml
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.AssemblyReference.cache
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelLexer.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelParser.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelListener.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelBaseListener.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelVisitor.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelBaseVisitor.cs
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.Antlr4GeneratedCodeFileListAbsolute.txt
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.CoreCompileInputs.cache
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.csproj.CopyComplete
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.dll
+D:\c#\PseudoExcel\PseudoExcelExpressionCalculator\obj\Debug\PseudoExcelExpressionCalculator.pdb

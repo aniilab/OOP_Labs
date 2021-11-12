@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PseudoExcel
+﻿namespace PseudoExcel.Utils
 {
     public struct Index
     {
@@ -26,7 +20,7 @@ namespace PseudoExcel
                 i = i % 26;
             }
             Arr[k] = i;
-            string res = "";
+            string res = string.Empty;
             for (int j = 0; j <= k; j++)
             {
                 res += ((char)('A' + Arr[j])).ToString();
@@ -54,7 +48,6 @@ namespace PseudoExcel
             }
             res.col_--;
             return res;
-
         }
 
 
