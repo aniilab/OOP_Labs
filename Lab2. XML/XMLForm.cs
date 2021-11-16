@@ -18,11 +18,10 @@ namespace LabXML
         string HelpFilePath = "D:\\c#\\LabXML\\LabXML\\help.txt";
         string XMLPath ="D:\\c#\\LabXML\\LabXML\\TopMovies.xml";
         string XSLPath = "D:\\c#\\LabXML\\LabXML\\bin\\Debug\\XMLtoHTML.xsl";
-        string HTMLPath = "D:\\c#\\LabXML\\LabXML\\bin\\Debug\\Movies.html";
         public XMLForm()
         {
             InitializeComponent();
-            SetComboBox();
+            SetComboBox(XMLPath);
             WindowState = FormWindowState.Maximized;
             nameComboBox.Enabled = false;
             dateComboBox.Enabled = false;
@@ -35,10 +34,10 @@ namespace LabXML
             LINQtoXMLradioButton.Checked = true;
         }
 
-        public void SetComboBox()
+        public void SetComboBox(string path)
         {
             IStrategy p = new LINQtoXML();
-            List<Movie> res = p.AnalyzeFile(new Movie(), XMLPath);
+            List<Movie> res = p.AnalyzeFile(new Movie(), path);
             List<string> name = new List<string>();
             List<string> date = new List<string>();
             List<string> budget = new List<string>();
@@ -100,34 +99,7 @@ namespace LabXML
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            nameCheckBox.Checked = false;
-            realeseDateCheckBox.Checked = false;
-            budgetCheckBox.Checked = false;
-            countryCheckBox.Checked = false;
-            timeCheckBox.Checked = false;
-            watchedCheckBox.Checked = false;
-            productionCheckBox.Checked = false;
-            genreCheckBox.Checked = false;
-            DOMradioButton.Checked = false;
-            SAXradioButton.Checked = false;
-            LINQtoXMLradioButton.Checked = false;
-            nameComboBox.Text = null;
-            dateComboBox.Text = null;
-            BudgetComboBox.Text = null;
-            CountryComboBox.Text = null;
-            TimeComboBox.Text = null;
-            WatchedComboBox.Text = null;
-            ProductionComboBox.Text = null;
-            GenreComboBox.Text = null;
-            nameComboBox.Enabled = false;
-            dateComboBox.Enabled = false;
-            BudgetComboBox.Enabled = false;
-            CountryComboBox.Enabled = false;
-            TimeComboBox.Enabled = false;
-            WatchedComboBox.Enabled = false;
-            ProductionComboBox.Enabled = false;
-            GenreComboBox.Enabled = false;
+            ClearForm();
         }
 
         private void helpMenu_Click(object sender, EventArgs e)
@@ -180,7 +152,7 @@ namespace LabXML
 
             xsl.Load(XSLPath);
             string input = XMLPath;
-            string result = HTMLPath;
+            string result = @"HTMLOutput.html";
             xsl.Transform(input, result);
             MessageBox.Show("Success!");
         }
@@ -303,6 +275,74 @@ namespace LabXML
         private void watchedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             WatchedComboBox.Enabled = true;
+        }
+
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            string path = string.Empty;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+            }
+
+            try
+            {
+                ClearComboBox();
+                ClearForm();
+                SetComboBox(path);
+                XMLPath = path;
+                MessageBox.Show("Done!");
+            }
+            catch
+            {
+                MessageBox.Show("Wrong file!");
+                SetComboBox(XMLPath);
+            }
+        }
+
+        private void ClearComboBox()
+        {
+            nameComboBox.Items.Clear();
+            dateComboBox.Items.Clear();
+            BudgetComboBox.Items.Clear();
+            CountryComboBox.Items.Clear();
+            TimeComboBox.Items.Clear();
+            WatchedComboBox.Items.Clear();
+            ProductionComboBox.Items.Clear();
+            GenreComboBox.Items.Clear();
+
+        }
+
+        private void ClearForm()
+        {
+            richTextBox1.Clear();
+            nameCheckBox.Checked = false;
+            realeseDateCheckBox.Checked = false;
+            budgetCheckBox.Checked = false;
+            countryCheckBox.Checked = false;
+            timeCheckBox.Checked = false;
+            watchedCheckBox.Checked = false;
+            productionCheckBox.Checked = false;
+            genreCheckBox.Checked = false;
+            DOMradioButton.Checked = false;
+            SAXradioButton.Checked = false;
+            LINQtoXMLradioButton.Checked = false;
+            nameComboBox.Text = null;
+            dateComboBox.Text = null;
+            BudgetComboBox.Text = null;
+            CountryComboBox.Text = null;
+            TimeComboBox.Text = null;
+            WatchedComboBox.Text = null;
+            ProductionComboBox.Text = null;
+            GenreComboBox.Text = null;
+            nameComboBox.Enabled = false;
+            dateComboBox.Enabled = false;
+            BudgetComboBox.Enabled = false;
+            CountryComboBox.Enabled = false;
+            TimeComboBox.Enabled = false;
+            WatchedComboBox.Enabled = false;
+            ProductionComboBox.Enabled = false;
+            GenreComboBox.Enabled = false;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TopMovies>
+<Movies>
   <Movie
     Name ="The Shawshank Redemption"
     ReleaseDate="September 10, 1994"
@@ -60,4 +60,4 @@
     Country = "United States"
     Watched = "Yes">
   </Movie>
-</TopMovies>
+</Movies>

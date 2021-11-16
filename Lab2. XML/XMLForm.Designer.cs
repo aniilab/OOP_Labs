@@ -59,10 +59,10 @@ namespace LabXML
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.Author = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -378,8 +378,7 @@ namespace LabXML
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFile,
-            this.saveFile});
+            this.openFile});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(54, 29);
             this.toolStripMenuItem2.Text = "File";
@@ -390,16 +389,9 @@ namespace LabXML
             this.openFile.Name = "openFile";
             this.openFile.ShortcutKeyDisplayString = "Ctrl+O";
             this.openFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFile.Size = new System.Drawing.Size(223, 34);
+            this.openFile.Size = new System.Drawing.Size(270, 34);
             this.openFile.Text = "Open";
-            // 
-            // saveFile
-            // 
-            this.saveFile.Image = ((System.Drawing.Image)(resources.GetObject("saveFile.Image")));
-            this.saveFile.Name = "saveFile";
-            this.saveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveFile.Size = new System.Drawing.Size(223, 34);
-            this.saveFile.Text = "Save";
+            this.openFile.Click += new System.EventHandler(this.openFile_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -425,6 +417,10 @@ namespace LabXML
             this.Author.Size = new System.Drawing.Size(169, 34);
             this.Author.Text = "Author";
             this.Author.Click += new System.EventHandler(this.Author_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // XMLForm
             // 
@@ -503,10 +499,10 @@ namespace LabXML
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem openFile;
-        private System.Windows.Forms.ToolStripMenuItem saveFile;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
         private System.Windows.Forms.ToolStripMenuItem Author;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
