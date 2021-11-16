@@ -1,0 +1,9 @@
+Hello!
+This program can find movies by some parameters set by user.
+For example:
+Name - name of the movie;
+Release date - full date when the movie was released;
+Genre - genre of the movie... etc
+All you need to do is to choose parameters and to choose which method of searching movies you would like to use. There are 3 of them: DOM, SAX and LINQ.
+Also, you are able to transform your movies into HTML-table, just click "Transform to HTML".
+Good luck!

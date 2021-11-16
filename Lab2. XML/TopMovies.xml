@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TopMovies>
+  <Movie
+    Name ="The Shawshank Redemption"
+    ReleaseDate="September 10, 1994"
+    Genre ="drama film"
+    RunningTime = "142 minutes"
+    Budget ="$25 million"
+    Production = "Castle Rock Entertainment"
+    Country = "United States"
+    Watched = "Yes">
+  </Movie>
+  <Movie
+    Name ="The Godfather"
+    ReleaseDate="March 14, 1972"
+    Genre ="crime film"
+    RunningTime = "177 minutes"
+    Budget ="	$6–7.2 million"
+    Production = "Paramount Pictures"
+    Country = "United States"
+    Watched = "No">
+  </Movie>
+  <Movie
+    Name = "The Dark Knight"
+    ReleaseDate= "July 14, 2008"
+    Genre = "superhero film"
+    RunningTime = "152 minutes"
+    Budget = "$185 million"
+    Production = "Warner Bros. Pictures"
+    Country = "United States"
+    Watched = "No">
+  </Movie>
+  <Movie
+    Name = "Schindler's List"
+    ReleaseDate= "November 30, 1993"
+    Genre = "epic historical drama film"
+    RunningTime = "195 minutes"
+    Budget = "$22 million"
+    Production = "Amblin Entertainment, Universal Pictures"
+    Country = "United States"
+    Watched = "No">
+  </Movie>
+  <Movie
+    Name = "Inception"
+    ReleaseDate= "July 8, 2010"
+    Genre = "science fiction action film"
+    RunningTime = "148 minutes"
+    Budget = "$160 million"
+    Production = "Legendary Pictures, Syncopy"
+    Country = "United States, United Kingdom"
+    Watched = "Yes">
+  </Movie>
+  <Movie
+    Name = "Forrest Gump"
+    ReleaseDate= "June 23, 1994"
+    Genre = "comedy-drama film"
+    RunningTime = "142 minutes"
+    Budget = "$55 million"
+    Production = "Paramount Pictures"
+    Country = "United States"
+    Watched = "Yes">
+  </Movie>
+</TopMovies>

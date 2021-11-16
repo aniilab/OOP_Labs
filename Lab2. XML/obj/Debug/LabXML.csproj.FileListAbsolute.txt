@@ -1,0 +1,10 @@
+D:\c#\LabXML\LabXML\bin\Debug\LabXML.exe.config
+D:\c#\LabXML\LabXML\bin\Debug\LabXML.exe
+D:\c#\LabXML\LabXML\bin\Debug\LabXML.pdb
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.csproj.AssemblyReference.cache
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.XMLForm.resources
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.Properties.Resources.resources
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.csproj.GenerateResource.cache
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.csproj.CoreCompileInputs.cache
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.exe
+D:\c#\LabXML\LabXML\obj\Debug\LabXML.pdb
